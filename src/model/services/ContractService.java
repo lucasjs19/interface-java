@@ -21,10 +21,7 @@ public class ContractService {
             LocalDate dueDate = contract.getDate().plus(i, ChronoUnit.MONTHS);
             double totalValue = contract.getTotalValue()/months;
             double payment = totalValue + paymentService.paymentFee(paymentService.interest(totalValue, i)) + paymentService.interest(totalValue, i);
-            Installment installment = new Installment(dueDate, payment);
-
-            list.add(installment);
+            contract.getInstallments().add(new Installment(dueDate, payment));
         }
-        contract.setInstallments(list);
     }
 }
